@@ -7,7 +7,6 @@ import (
 	"strconv"
 )
 
-
 // SupportedVersions : A list of PostgreSQL version supported by this software
 // Old versions (even not currently supported by the community) are available too.
 // The idea is support any version greater than 9.0.
@@ -28,6 +27,14 @@ const (
 
 	// TimeParameter : This value should be displayed as time
 	TimeParameter
+)
+
+type OSFamily string
+
+const (
+	WindowsOS OSFamily = "Windows"
+	LinuxOS   OSFamily = "Linux"
+	UnixOS    OSFamily = "Unix"
 )
 
 type EnvironmentName int

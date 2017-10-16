@@ -12,8 +12,8 @@ var effectiveCacheSize = DatabaseParameter{
 	Type:     BytesParameter}
 
 // EffectiveCacheSize : Computes a 'effective_cache_size' GUC of postgresql.conf
-func EffectiveCacheSize(pgVersion float32, osFamily string, env EnvironmentName, totalRAM int) (int, DatabaseParameter, error) {
-	setEffectiveCacheSize(pgVersion, osFamily, env)
+func EffectiveCacheSize(pgVersion float32, env EnvironmentName, totalRAM int) (int, DatabaseParameter, error) {
+	setEffectiveCacheSize(pgVersion, env)
 
 	strRule := strings.Replace(effectiveCacheSize.Rule, "TOTAL_RAM", strconv.Itoa(totalRAM), -1)
 
@@ -22,13 +22,12 @@ func EffectiveCacheSize(pgVersion float32, osFamily string, env EnvironmentName,
 		return 0, DatabaseParameter{}, err
 	}
 
-	newValue := eval(exp)
-	effectiveCacheSize.Value = fixValue(&effectiveCacheSize, newValue, pgVersion)
+	effectiveCacheSize.Value = fixValue(&effectiveCacheSize, eval(exp), pgVersion)
 
 	return effectiveCacheSize.Value, effectiveCacheSize, nil
 }
 
-func setEffectiveCacheSize(pgVersion float32, osFamily string, env EnvironmentName) {
+func setEffectiveCacheSize(pgVersion float32, env EnvironmentName) {
 	effectiveCacheSize.MaxValue = -1
 
 	if pgVersion <= 9.2 {

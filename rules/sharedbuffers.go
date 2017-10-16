@@ -12,7 +12,7 @@ var sharedBuffers = DatabaseParameter{
 	Type:     BytesParameter}
 
 // SharedBuffers : Computes a 'shared_buffers' GUC of postgresql.conf
-func SharedBuffers(pgVersion float32, osFamily string, env EnvironmentName, totalRAM int) (int, DatabaseParameter, error) {
+func SharedBuffers(pgVersion float32, osFamily OSFamily, env EnvironmentName, totalRAM int) (int, DatabaseParameter, error) {
 
 	setSharedBuffersRules(pgVersion, osFamily, env)
 
@@ -28,11 +28,11 @@ func SharedBuffers(pgVersion float32, osFamily string, env EnvironmentName, tota
 	return sharedBuffers.Value, sharedBuffers, nil
 }
 
-func setSharedBuffersRules(pgVersion float32, osFamily string, env EnvironmentName) {
+func setSharedBuffersRules(pgVersion float32, osFamily OSFamily, env EnvironmentName) {
 
 	sharedBuffers.MaxValue = 8 * GIGABYTE
 
-	if osFamily == "Windows" && pgVersion <= 9.6 {
+	if osFamily == WindowsOS && pgVersion <= 9.6 {
 		sharedBuffers.MaxValue = 512 * MEGABYTE
 	}
 
