@@ -29,13 +29,17 @@ const (
 	TimeParameter
 )
 
+// OSFamily : Defines a operational system familly
 type OSFamily string
 
-const (
-	WindowsOS OSFamily = "Windows"
-	LinuxOS   OSFamily = "Linux"
-	UnixOS    OSFamily = "Unix"
-)
+// WindowsOS : Defines Windows OS
+const WindowsOS OSFamily = "Windows"
+
+// LinuxOS : Defines Linux OS
+const LinuxOS OSFamily = "Linux"
+
+// UnixOS : Defines Unix OS
+const UnixOS OSFamily = "Unix"
 
 type EnvironmentName int
 
