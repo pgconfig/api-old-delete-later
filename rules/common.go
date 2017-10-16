@@ -32,23 +32,35 @@ const (
 // OSFamily : Defines a operational system familly
 type OSFamily string
 
-// WindowsOS : Defines Windows OS
-const WindowsOS OSFamily = "Windows"
+const (
+	// WindowsOS : Defines Windows OS
+	WindowsOS OSFamily = "Windows"
 
-// LinuxOS : Defines Linux OS
-const LinuxOS OSFamily = "Linux"
+	// LinuxOS : Defines Linux OS
+	LinuxOS OSFamily = "Linux"
 
-// UnixOS : Defines Unix OS
-const UnixOS OSFamily = "Unix"
+	// UnixOS : Defines Unix OS
+	UnixOS OSFamily = "Unix"
+)
 
-type EnvironmentName int
+// EnvironmentName : Defines the environment name
+type EnvironmentName string
 
 const (
-	WebEnvironment EnvironmentName = 1 + iota
-	OLTPEnvironment
-	DWEnvironment
-	MixedEnvironment
-	DesktopEnvironment
+	// WebEnvironment : Defines the "WEB" environment
+	WebEnvironment EnvironmentName = "WEB"
+
+	// OLTPEnvironment : Defines the "OLTP" environment
+	OLTPEnvironment EnvironmentName = "OLTP"
+
+	// DWEnvironment : Defines the "DW" environment
+	DWEnvironment EnvironmentName = "DW"
+
+	// MixedEnvironment : Defines the "Mixed" environment
+	MixedEnvironment EnvironmentName = "Mixed"
+
+	// DesktopEnvironment : Defines the "Desktop" environment
+	DesktopEnvironment EnvironmentName = "Desktop"
 )
 
 // DatabaseParameter : Provides a parameter details
