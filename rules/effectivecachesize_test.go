@@ -21,7 +21,7 @@ func TestEffectiveCacheSize(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(fmt.Sprintf("%.1f", tc.pgVersion), func(t *testing.T) {
 
-			result, _, err := EffectiveCacheSize(tc.pgVersion, tc.env, tc.totalRAM)
+			result, _, err := EffectiveCacheSize(ParameterArgs{PGVersion: tc.pgVersion, Env: tc.env, TotalRAM: tc.totalRAM})
 
 			if err != nil {
 				t.Error(err)

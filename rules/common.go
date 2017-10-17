@@ -2,9 +2,11 @@ package rules
 
 import (
 	"go/ast"
+	"go/parser"
 	"go/token"
 	"reflect"
 	"strconv"
+	"strings"
 )
 
 // SupportedVersions : A list of PostgreSQL version supported by this software
@@ -146,4 +148,33 @@ func fixValue(p *DatabaseParameter, value int, pgVersion float32) int {
 	}
 
 	return result
+}
+
+// ParameterArgs : contains a argument to compute a parameter
+type ParameterArgs struct {
+	PGVersion float32
+	Env       EnvironmentName
+	TotalRAM  int
+}
+
+// ParameterRule : Defines a functions who compute a rule for the parameter
+type ParameterRule func(ParameterArgs) DatabaseParameter
+
+func computeParameter(args ParameterArgs, f ParameterRule) (int, DatabaseParameter, error) {
+	param := f(args)
+
+	strRule := ""
+
+	if strings.Contains(param.Rule, "TOTAL_RAM") {
+		strRule = strings.Replace(param.Rule, "TOTAL_RAM", strconv.Itoa(args.TotalRAM), -1)
+	}
+
+	exp, err := parser.ParseExpr(strRule)
+	if err != nil {
+		return 0, DatabaseParameter{}, err
+	}
+
+	param.Value = fixValue(&param, eval(exp), args.PGVersion)
+
+	return param.Value, param, nil
 }
