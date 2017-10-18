@@ -155,6 +155,7 @@ type ParameterArgs struct {
 	PGVersion float32
 	Env       EnvironmentName
 	TotalRAM  int
+	MaxConn   int
 }
 
 // ParameterRule : Defines a functions who compute a rule for the parameter
@@ -163,10 +164,14 @@ type ParameterRule func(ParameterArgs) DatabaseParameter
 func computeParameter(args ParameterArgs, f ParameterRule) (int, DatabaseParameter, error) {
 	param := f(args)
 
-	strRule := ""
+	strRule := param.Rule
 
-	if strings.Contains(param.Rule, "TOTAL_RAM") {
-		strRule = strings.Replace(param.Rule, "TOTAL_RAM", strconv.Itoa(args.TotalRAM), -1)
+	if strings.Contains(param.Rule, "TOTAL_RAM") && args.TotalRAM > 0 {
+		strRule = strings.Replace(strRule, "TOTAL_RAM", strconv.Itoa(args.TotalRAM), -1)
+	}
+
+	if strings.Contains(param.Rule, "MAX_CONNECTIONS") && args.MaxConn > 0 {
+		strRule = strings.Replace(strRule, "MAX_CONNECTIONS", strconv.Itoa(args.MaxConn), -1)
 	}
 
 	exp, err := parser.ParseExpr(strRule)

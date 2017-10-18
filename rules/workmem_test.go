@@ -25,7 +25,7 @@ func TestWorkMem(t *testing.T) {
 	for _, tc := range cases {
 		t.Run(fmt.Sprintf("%s: %.1f with %d connections", tc.env, tc.pgVersion, tc.maxConn), func(t *testing.T) {
 
-			result, _, err := WorkMem(tc.pgVersion, tc.env, tc.totalRAM, tc.maxConn)
+			result, _, err := WorkMem(ParameterArgs{PGVersion: tc.pgVersion, Env: tc.env, TotalRAM: tc.totalRAM, MaxConn: tc.maxConn})
 
 			if err != nil {
 				t.Error(err)
