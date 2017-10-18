@@ -172,11 +172,11 @@ func computeParameter(args ParameterArgs, f ParameterRule) (int, DatabaseParamet
 
 	strRule := param.Rule
 
-	if strings.Contains(param.Rule, "TOTAL_RAM") && args.TotalRAM > 0 {
+	if strings.Contains(strRule, "TOTAL_RAM") && args.TotalRAM > 0 {
 		strRule = strings.Replace(strRule, "TOTAL_RAM", strconv.Itoa(args.TotalRAM), -1)
 	}
 
-	if strings.Contains(param.Rule, "MAX_CONNECTIONS") && args.MaxConn > 0 {
+	if strings.Contains(strRule, "MAX_CONNECTIONS") && args.MaxConn > 0 {
 		strRule = strings.Replace(strRule, "MAX_CONNECTIONS", strconv.Itoa(args.MaxConn), -1)
 	}
 
