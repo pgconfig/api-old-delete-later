@@ -10,7 +10,9 @@ func setSharedBuffers(args ParameterArgs) DatabaseParameter {
 	var sharedBuffers = DatabaseParameter{
 		Name:     "shared_buffers",
 		MaxValue: 8 * GIGABYTE,
-		Type:     BytesParameter}
+		Type:     BytesParameter,
+		Category: MemoryRelatedCategory,
+	}
 
 	if args.OSFamily == WindowsOS && args.PGVersion <= 9.6 {
 		sharedBuffers.MaxValue = 512 * MEGABYTE

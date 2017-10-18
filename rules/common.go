@@ -65,6 +65,21 @@ const (
 	DesktopEnvironment EnvironmentName = "Desktop"
 )
 
+// ParameterCategory : Defines a category for a parameter
+type ParameterCategory string
+
+const (
+
+	// MemoryRelatedCategory : Defines a memory category
+	MemoryRelatedCategory ParameterCategory = "Memory Configuration"
+
+	// ChekPointRelatedCategory : Defines a checkpoint category
+	ChekPointRelatedCategory ParameterCategory = "Checkpoint Related Configuration"
+
+	// NetworkRelatedCategory : Defines a network category
+	NetworkRelatedCategory ParameterCategory = "Network Related Configuration"
+)
+
 // DatabaseParameter : Provides a parameter details
 type DatabaseParameter struct {
 	Name         string
@@ -74,6 +89,7 @@ type DatabaseParameter struct {
 	Type         ParameterType
 	Rule         string
 	Abstract     string
+	Category     ParameterCategory
 	Articles     []ArticleRecommendation
 	DocURLSuffix string
 }

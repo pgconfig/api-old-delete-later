@@ -10,7 +10,9 @@ func effectiveCacheSizeRules(args ParameterArgs) DatabaseParameter {
 	var newParam = DatabaseParameter{
 		Name:     "effective_cache_size",
 		MaxValue: -1,
-		Type:     BytesParameter}
+		Type:     BytesParameter,
+		Category: MemoryRelatedCategory,
+	}
 
 	if args.PGVersion <= 9.2 {
 		newParam.DefaultValue = 128 * MEGABYTE

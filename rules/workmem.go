@@ -10,7 +10,9 @@ func setWorkMem(args ParameterArgs) DatabaseParameter {
 	var workMem = DatabaseParameter{
 		Name:     "work_mem",
 		MaxValue: -1,
-		Type:     BytesParameter}
+		Type:     BytesParameter,
+		Category: MemoryRelatedCategory,
+	}
 
 	if args.PGVersion <= 9.3 {
 		workMem.DefaultValue = 1 * MEGABYTE
@@ -44,7 +46,9 @@ func MaintenanceWorkMem(args ParameterArgs) (int, DatabaseParameter, error) {
 func setMaintenanceWorkMem(args ParameterArgs) DatabaseParameter {
 
 	newValue := DatabaseParameter{
-		MaxValue: 2 * GIGABYTE}
+		MaxValue: 2 * GIGABYTE,
+		Category: MemoryRelatedCategory,
+	}
 
 	if args.PGVersion <= 9.3 {
 		newValue.DefaultValue = 16 * MEGABYTE
