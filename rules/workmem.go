@@ -28,3 +28,28 @@ func setWorkMem(args ParameterArgs) DatabaseParameter {
 
 	return workMem
 }
+
+// MaintenanceWorkMem : Computes a 'maintenance_work_mem' GUC of postgresql.conf
+func MaintenanceWorkMem(args ParameterArgs) (int, DatabaseParameter, error) {
+	return computeParameter(args, setMaintenanceWorkMem)
+}
+
+func setMaintenanceWorkMem(args ParameterArgs) DatabaseParameter {
+
+	newValue := DatabaseParameter{
+		MaxValue: 2 * GIGABYTE}
+
+	if args.PGVersion <= 9.3 {
+		newValue.DefaultValue = 16 * MEGABYTE
+	} else {
+		newValue.DefaultValue = 64 * MEGABYTE
+	}
+
+	if args.Env == DWEnvironment {
+		newValue.Rule = "TOTAL_RAM / 8"
+	} else {
+		newValue.Rule = "TOTAL_RAM / 16"
+	}
+
+	return newValue
+}
