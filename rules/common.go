@@ -76,8 +76,13 @@ type DatabaseParameter struct {
 }
 
 const (
+	// KILOBYTE : Defined in bytes
 	KILOBYTE = 1024
+
+	// MEGABYTE : Defined in bytes
 	MEGABYTE = KILOBYTE * 1024
+
+	// GIGABYTE : Defined in bytes
 	GIGABYTE = MEGABYTE * 1024
 )
 
