@@ -75,6 +75,7 @@ type DatabaseParameter struct {
 	Rule         string
 	Abstract     string
 	Articles     []ArticleRecommendation
+	DocURLSuffix string
 }
 
 // ArticleRecommendation : contains a article related with the paramater

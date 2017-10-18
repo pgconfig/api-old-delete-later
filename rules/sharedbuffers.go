@@ -28,6 +28,7 @@ func setSharedBuffers(args ParameterArgs) DatabaseParameter {
 		sharedBuffers.Rule = "TOTAL_RAM / 4"
 	}
 
+	sharedBuffers.DocURLSuffix = "runtime-config-resource.html#GUC-SHARED-BUFFERS"
 	sharedBuffers.Abstract = "This parameter allocate memory slots, used by all process. Mainly works as the disk cache and its similar to oracle's SGA buffer."
 
 	sharedBuffers.Articles = []ArticleRecommendation{

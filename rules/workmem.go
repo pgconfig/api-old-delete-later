@@ -26,6 +26,7 @@ func setWorkMem(args ParameterArgs) DatabaseParameter {
 		workMem.Rule = "TOTAL_RAM / 6 / MAX_CONNECTIONS"
 	}
 
+	workMem.DocURLSuffix = "runtime-config-resource.html#GUC-WORK-MEM"
 	workMem.Abstract = "This parameter defines how much a work_mem buffer can allocate. Each query can open many work_mem buffers when execute (normally one by subquery) if it uses any sort (or aggregate) operation. When work_mem its too small a temp file is created."
 
 	workMem.Articles = []ArticleRecommendation{
