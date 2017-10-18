@@ -86,6 +86,8 @@ type DatabaseParameter struct {
 	Value        int
 	MaxValue     int
 	DefaultValue int
+	MaxVersion   float32
+
 	Type         ParameterType
 	Rule         string
 	Abstract     string
@@ -173,7 +175,7 @@ func fixValue(p *DatabaseParameter, value int, pgVersion float32) int {
 		result = p.MaxValue
 	}
 
-	if !hasElem(SupportedVersions, pgVersion) {
+	if !hasElem(SupportedVersions, pgVersion) || pgVersion > p.MaxVersion {
 		result = -1
 	}
 
