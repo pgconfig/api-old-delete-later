@@ -28,5 +28,12 @@ func setSharedBuffers(args ParameterArgs) DatabaseParameter {
 		sharedBuffers.Rule = "TOTAL_RAM / 4"
 	}
 
+	sharedBuffers.Abstract = "This parameter allocate memory slots, used by all process. Mainly works as the disk cache and its similar to oracle's SGA buffer."
+
+	sharedBuffers.Articles = []ArticleRecommendation{
+		ArticleRecommendation{Title: "Tuning Your PostgreSQL Server", URL: "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server#shared_buffers"},
+		ArticleRecommendation{Title: "Tuning shared_buffers and wal_buffers", URL: "http://rhaas.blogspot.com.br/2012/03/tuning-sharedbuffers-and-walbuffers.html"},
+	}
+
 	return sharedBuffers
 }

@@ -73,6 +73,14 @@ type DatabaseParameter struct {
 	DefaultValue int
 	Type         ParameterType
 	Rule         string
+	Abstract     string
+	Articles     []ArticleRecommendation
+}
+
+// ArticleRecommendation : contains a article related with the paramater
+type ArticleRecommendation struct {
+	Title string
+	URL   string
 }
 
 const (

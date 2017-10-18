@@ -24,5 +24,7 @@ func effectiveCacheSizeRules(args ParameterArgs) DatabaseParameter {
 		newParam.Rule = "TOTAL_RAM / 4 * 3"
 	}
 
+	newParam.Abstract = "This parameter does not allocate any resource, just tells to the query planner how much of the operating system cache are avaliable to use. Remember that shared_buffers needs to smaller than 8GB, then the query planner will prefer read the disk because it will be on memory."
+
 	return newParam
 }
