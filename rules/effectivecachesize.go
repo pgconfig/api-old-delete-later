@@ -8,10 +8,12 @@ func EffectiveCacheSize(args ParameterArgs) (int, DatabaseParameter, error) {
 func effectiveCacheSizeRules(args ParameterArgs) DatabaseParameter {
 
 	var newParam = DatabaseParameter{
-		Name:     "effective_cache_size",
-		MaxValue: -1,
-		Type:     BytesParameter,
-		Category: MemoryRelatedCategory,
+		Name:         "effective_cache_size",
+		MaxValue:     -1,
+		Type:         BytesParameter,
+		Category:     MemoryRelatedCategory,
+		DocURLSuffix: "runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE",
+		Abstract:     "This parameter does not allocate any resource, just tells to the query planner how much of the operating system cache are avaliable to use. Remember that shared_buffers needs to smaller than 8GB, then the query planner will prefer read the disk because it will be on memory.",
 	}
 
 	if args.PGVersion <= 9.2 {
@@ -25,9 +27,6 @@ func effectiveCacheSizeRules(args ParameterArgs) DatabaseParameter {
 	} else {
 		newParam.Rule = "TOTAL_RAM / 4 * 3"
 	}
-
-	newParam.DocURLSuffix = "runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE"
-	newParam.Abstract = "This parameter does not allocate any resource, just tells to the query planner how much of the operating system cache are avaliable to use. Remember that shared_buffers needs to smaller than 8GB, then the query planner will prefer read the disk because it will be on memory."
 
 	return newParam
 }

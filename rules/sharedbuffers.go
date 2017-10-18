@@ -8,10 +8,16 @@ func SharedBuffers(args ParameterArgs) (int, DatabaseParameter, error) {
 func setSharedBuffers(args ParameterArgs) DatabaseParameter {
 
 	var sharedBuffers = DatabaseParameter{
-		Name:     "shared_buffers",
-		MaxValue: 8 * GIGABYTE,
-		Type:     BytesParameter,
-		Category: MemoryRelatedCategory,
+		Name:         "shared_buffers",
+		MaxValue:     8 * GIGABYTE,
+		Type:         BytesParameter,
+		Category:     MemoryRelatedCategory,
+		DocURLSuffix: "runtime-config-resource.html#GUC-SHARED-BUFFERS",
+		Abstract:     "This parameter allocate memory slots, used by all process. Mainly works as the disk cache and its similar to oracle's SGA buffer.",
+		Articles: []ArticleRecommendation{
+			ArticleRecommendation{Title: "Tuning Your PostgreSQL Server", URL: "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server#shared_buffers"},
+			ArticleRecommendation{Title: "Tuning shared_buffers and wal_buffers", URL: "http://rhaas.blogspot.com.br/2012/03/tuning-sharedbuffers-and-walbuffers.html"},
+		},
 	}
 
 	if args.OSFamily == WindowsOS && args.PGVersion <= 9.6 {
@@ -28,14 +34,6 @@ func setSharedBuffers(args ParameterArgs) DatabaseParameter {
 		sharedBuffers.Rule = "TOTAL_RAM / 16"
 	} else {
 		sharedBuffers.Rule = "TOTAL_RAM / 4"
-	}
-
-	sharedBuffers.DocURLSuffix = "runtime-config-resource.html#GUC-SHARED-BUFFERS"
-	sharedBuffers.Abstract = "This parameter allocate memory slots, used by all process. Mainly works as the disk cache and its similar to oracle's SGA buffer."
-
-	sharedBuffers.Articles = []ArticleRecommendation{
-		ArticleRecommendation{Title: "Tuning Your PostgreSQL Server", URL: "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server#shared_buffers"},
-		ArticleRecommendation{Title: "Tuning shared_buffers and wal_buffers", URL: "http://rhaas.blogspot.com.br/2012/03/tuning-sharedbuffers-and-walbuffers.html"},
 	}
 
 	return sharedBuffers

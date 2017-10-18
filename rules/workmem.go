@@ -8,10 +8,15 @@ func WorkMem(args ParameterArgs) (int, DatabaseParameter, error) {
 func setWorkMem(args ParameterArgs) DatabaseParameter {
 
 	var workMem = DatabaseParameter{
-		Name:     "work_mem",
-		MaxValue: -1,
-		Type:     BytesParameter,
-		Category: MemoryRelatedCategory,
+		Name:         "work_mem",
+		MaxValue:     -1,
+		Type:         BytesParameter,
+		Category:     MemoryRelatedCategory,
+		DocURLSuffix: "runtime-config-resource.html#GUC-WORK-MEM",
+		Abstract:     "This parameter defines how much a work_mem buffer can allocate. Each query can open many work_mem buffers when execute (normally one by subquery) if it uses any sort (or aggregate) operation. When work_mem its too small a temp file is created.",
+		Articles: []ArticleRecommendation{
+			ArticleRecommendation{Title: "Understaning postgresql.conf: WORK_MEM", URL: "https://www.depesz.com/2011/07/03/understanding-postgresql-conf-work_mem/"},
+		},
 	}
 
 	if args.PGVersion <= 9.3 {
@@ -28,13 +33,6 @@ func setWorkMem(args ParameterArgs) DatabaseParameter {
 		workMem.Rule = "TOTAL_RAM / 6 / MAX_CONNECTIONS"
 	}
 
-	workMem.DocURLSuffix = "runtime-config-resource.html#GUC-WORK-MEM"
-	workMem.Abstract = "This parameter defines how much a work_mem buffer can allocate. Each query can open many work_mem buffers when execute (normally one by subquery) if it uses any sort (or aggregate) operation. When work_mem its too small a temp file is created."
-
-	workMem.Articles = []ArticleRecommendation{
-		ArticleRecommendation{Title: "Understaning postgresql.conf: WORK_MEM", URL: "https://www.depesz.com/2011/07/03/understanding-postgresql-conf-work_mem/"},
-	}
-
 	return workMem
 }
 
@@ -48,7 +46,9 @@ func setMaintenanceWorkMem(args ParameterArgs) DatabaseParameter {
 	newValue := DatabaseParameter{
 		Name:     "maintenance_work_mem",
 		MaxValue: 2 * GIGABYTE,
+		Type:     BytesParameter,
 		Category: MemoryRelatedCategory,
+		Abstract: "This parameter defines how much a maintenance operation (ALTER TABLE, VACUUM, REINDEX, AutoVACUUM worker, etc) buffer can use.",
 	}
 
 	if args.PGVersion <= 9.3 {
@@ -62,8 +62,6 @@ func setMaintenanceWorkMem(args ParameterArgs) DatabaseParameter {
 	} else {
 		newValue.Rule = "TOTAL_RAM / 16"
 	}
-
-	newValue.Abstract = "This parameter defines how much a maintenance operation (ALTER TABLE, VACUUM, REINDEX, AutoVACUUM worker, etc) buffer can use."
 
 	return newValue
 }
