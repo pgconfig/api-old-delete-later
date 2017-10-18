@@ -46,6 +46,7 @@ func MaintenanceWorkMem(args ParameterArgs) (int, DatabaseParameter, error) {
 func setMaintenanceWorkMem(args ParameterArgs) DatabaseParameter {
 
 	newValue := DatabaseParameter{
+		Name:     "maintenance_work_mem",
 		MaxValue: 2 * GIGABYTE,
 		Category: MemoryRelatedCategory,
 	}
