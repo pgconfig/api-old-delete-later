@@ -1,50 +1,32 @@
 package rules
 
-import (
-	"go/parser"
-	"strconv"
-	"strings"
-)
-
-var sharedBuffers = DatabaseParameter{
-	Name:     "shared_buffers",
-	MaxValue: 8 * GIGABYTE,
-	Type:     BytesParameter}
-
 // SharedBuffers : Computes a 'shared_buffers' GUC of postgresql.conf
-func SharedBuffers(pgVersion float32, osFamily OSFamily, env EnvironmentName, totalRAM int) (int, DatabaseParameter, error) {
-
-	setSharedBuffersRules(pgVersion, osFamily, env)
-
-	strRule := strings.Replace(sharedBuffers.Rule, "TOTAL_RAM", strconv.Itoa(totalRAM), -1)
-
-	exp, err := parser.ParseExpr(strRule)
-	if err != nil {
-		return 0, DatabaseParameter{}, err
-	}
-
-	sharedBuffers.Value = fixValue(&sharedBuffers, eval(exp), pgVersion)
-
-	return sharedBuffers.Value, sharedBuffers, nil
+func SharedBuffers(args ParameterArgs) (int, DatabaseParameter, error) {
+	return computeParameter(args, setSharedBuffers)
 }
 
-func setSharedBuffersRules(pgVersion float32, osFamily OSFamily, env EnvironmentName) {
+func setSharedBuffers(args ParameterArgs) DatabaseParameter {
 
-	sharedBuffers.MaxValue = 8 * GIGABYTE
+	var sharedBuffers = DatabaseParameter{
+		Name:     "shared_buffers",
+		MaxValue: 8 * GIGABYTE,
+		Type:     BytesParameter}
 
-	if osFamily == WindowsOS && pgVersion <= 9.6 {
+	if args.OSFamily == WindowsOS && args.PGVersion <= 9.6 {
 		sharedBuffers.MaxValue = 512 * MEGABYTE
 	}
 
-	if pgVersion <= 9.2 {
+	if args.PGVersion <= 9.2 {
 		sharedBuffers.DefaultValue = 32 * MEGABYTE
 	} else {
 		sharedBuffers.DefaultValue = 128 * MEGABYTE
 	}
 
-	if env == DesktopEnvironment {
+	if args.Env == DesktopEnvironment {
 		sharedBuffers.Rule = "TOTAL_RAM / 16"
 	} else {
 		sharedBuffers.Rule = "TOTAL_RAM / 4"
 	}
+
+	return sharedBuffers
 }

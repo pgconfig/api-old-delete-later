@@ -156,6 +156,7 @@ type ParameterArgs struct {
 	Env       EnvironmentName
 	TotalRAM  int
 	MaxConn   int
+	OSFamily  OSFamily
 }
 
 // ParameterRule : Defines a functions who compute a rule for the parameter
