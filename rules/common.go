@@ -175,7 +175,7 @@ func fixValue(p *DatabaseParameter, value int, pgVersion float32) int {
 		result = p.MaxValue
 	}
 
-	if !hasElem(SupportedVersions, pgVersion) || pgVersion > p.MaxVersion {
+	if !hasElem(SupportedVersions, pgVersion) || (pgVersion > p.MaxVersion && p.MaxVersion > 0) {
 		result = -1
 	}
 
