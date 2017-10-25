@@ -1,7 +1,7 @@
 package rules
 
 // EffectiveCacheSize : Computes a 'effective_cache_size' GUC of postgresql.conf
-func EffectiveCacheSize(args ParameterArgs) (int, DatabaseParameter, error) {
+func EffectiveCacheSize(args ParameterArgs) (interface{}, DatabaseParameter, error) {
 	return computeParameter(args, effectiveCacheSizeRules)
 }
 

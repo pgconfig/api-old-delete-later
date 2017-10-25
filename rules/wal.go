@@ -5,7 +5,7 @@ import (
 )
 
 // MinWalSize : Computes a 'min_wal_size' GUC of postgresql.conf
-func MinWalSize(args ParameterArgs) (int, DatabaseParameter, error) {
+func MinWalSize(args ParameterArgs) (interface{}, DatabaseParameter, error) {
 	return computeParameter(args, setMinWalSize)
 }
 
@@ -50,7 +50,7 @@ func setMinWalSize(args ParameterArgs) DatabaseParameter {
 }
 
 // MaxWalSize : Computes a 'min_wal_size' GUC of postgresql.conf
-func MaxWalSize(args ParameterArgs) (int, DatabaseParameter, error) {
+func MaxWalSize(args ParameterArgs) (interface{}, DatabaseParameter, error) {
 	return computeParameter(args, setMaxWalSize)
 }
 

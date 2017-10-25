@@ -1,7 +1,7 @@
 package rules
 
 // WorkMem : Computes a 'work_mem' GUC of postgresql.conf
-func WorkMem(args ParameterArgs) (int, DatabaseParameter, error) {
+func WorkMem(args ParameterArgs) (interface{}, DatabaseParameter, error) {
 	return computeParameter(args, setWorkMem)
 }
 
@@ -37,7 +37,7 @@ func setWorkMem(args ParameterArgs) DatabaseParameter {
 }
 
 // MaintenanceWorkMem : Computes a 'maintenance_work_mem' GUC of postgresql.conf
-func MaintenanceWorkMem(args ParameterArgs) (int, DatabaseParameter, error) {
+func MaintenanceWorkMem(args ParameterArgs) (interface{}, DatabaseParameter, error) {
 	return computeParameter(args, setMaintenanceWorkMem)
 }
 

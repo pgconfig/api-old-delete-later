@@ -1,7 +1,7 @@
 package rules
 
 // SharedBuffers : Computes a 'shared_buffers' GUC of postgresql.conf
-func SharedBuffers(args ParameterArgs) (int, DatabaseParameter, error) {
+func SharedBuffers(args ParameterArgs) (interface{}, DatabaseParameter, error) {
 	return computeParameter(args, setSharedBuffers)
 }
 

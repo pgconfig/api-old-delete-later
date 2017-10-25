@@ -83,7 +83,7 @@ const (
 // DatabaseParameter : Provides a parameter details
 type DatabaseParameter struct {
 	Name         string
-	Value        int
+	Value        interface{}
 	MaxValue     int
 	DefaultValue int
 	MaxVersion   float32
@@ -203,7 +203,7 @@ type ParameterArgs struct {
 // ParameterRule : Defines a functions who compute a rule for the parameter
 type ParameterRule func(ParameterArgs) DatabaseParameter
 
-func computeParameter(args ParameterArgs, f ParameterRule) (int, DatabaseParameter, error) {
+func computeParameter(args ParameterArgs, f ParameterRule) (interface{}, DatabaseParameter, error) {
 	param := f(args)
 
 	strRule := param.Rule

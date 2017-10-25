@@ -1,7 +1,7 @@
 package rules
 
 // CheckpointSegments : Computes a 'checkpoint_segments' GUC of postgresql.conf
-func CheckpointSegments(args ParameterArgs) (int, DatabaseParameter, error) {
+func CheckpointSegments(args ParameterArgs) (interface{}, DatabaseParameter, error) {
 	return computeParameter(args, setCheckpointSegments)
 }
 
