@@ -17,7 +17,7 @@ func setCheckpointSegments(args ParameterArgs) DatabaseParameter {
 		DocURLSuffix: "runtime-config-wal.html#GUC-CHECKPOINT-SEGMENTS",
 		Abstract:     "This parameter defines how much WAL files can be stored before a automatic CHECKPOINT. All files are stored in the pg_xlog directory.",
 		Articles: []ArticleRecommendation{
-			ArticleRecommendation{
+			{
 				Title: "WRITE AHEAD LOG + UNDERSTANDING POSTGRESQL.CONF: CHECKPOINT_SEGMENTS, CHECKPOINT_TIMEOUT and CHECKPOINT_WARNING",
 				URL:   "https://www.depesz.com/2011/07/14/write-ahead-log-understanding-postgresql-conf-checkpoint_segments-checkpoint_timeout-checkpoint_warning/",
 			},

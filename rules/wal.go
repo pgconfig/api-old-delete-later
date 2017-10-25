@@ -21,11 +21,11 @@ func setMinWalSize(args ParameterArgs) DatabaseParameter {
 		DocURLSuffix: "runtime-config-wal.html#GUC-MIN-WAL-SIZE",
 		Abstract:     "This parameter defines the minimum size of the pg_xlog directory. pgx_log directory contains the WAL files.",
 		Articles: []ArticleRecommendation{
-			ArticleRecommendation{
+			{
 				Title: "Configuration changes in 9.5: transaction log size",
 				URL:   "http://www.databasesoup.com/2016/01/configuration-changes-in-95-transaction.html",
 			},
-			ArticleRecommendation{
+			{
 				Title: "Configuration changes in 9.5: transaction log size",
 				URL:   "http://www.databasesoup.com/2016/01/configuration-changes-in-95-transaction.html",
 			},
@@ -66,11 +66,11 @@ func setMaxWalSize(args ParameterArgs) DatabaseParameter {
 		DocURLSuffix: "runtime-config-wal.html#GUC-MIN-WAL-SIZE",
 		Abstract:     "This parameter defines the minimum size of the pg_xlog directory. pgx_log directory contains the WAL files.",
 		Articles: []ArticleRecommendation{
-			ArticleRecommendation{
+			{
 				Title: "Configuration changes in 9.5: transaction log size",
 				URL:   "http://www.databasesoup.com/2016/01/configuration-changes-in-95-transaction.html",
 			},
-			ArticleRecommendation{
+			{
 				Title: "Configuration changes in 9.5: transaction log size",
 				URL:   "http://www.databasesoup.com/2016/01/configuration-changes-in-95-transaction.html",
 			},

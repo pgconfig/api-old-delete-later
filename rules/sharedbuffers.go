@@ -15,8 +15,8 @@ func setSharedBuffers(args ParameterArgs) DatabaseParameter {
 		DocURLSuffix: "runtime-config-resource.html#GUC-SHARED-BUFFERS",
 		Abstract:     "This parameter allocate memory slots, used by all process. Mainly works as the disk cache and its similar to oracle's SGA buffer.",
 		Articles: []ArticleRecommendation{
-			ArticleRecommendation{Title: "Tuning Your PostgreSQL Server", URL: "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server#shared_buffers"},
-			ArticleRecommendation{Title: "Tuning shared_buffers and wal_buffers", URL: "http://rhaas.blogspot.com.br/2012/03/tuning-sharedbuffers-and-walbuffers.html"},
+			{Title: "Tuning Your PostgreSQL Server", URL: "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server#shared_buffers"},
+			{Title: "Tuning shared_buffers and wal_buffers", URL: "http://rhaas.blogspot.com.br/2012/03/tuning-sharedbuffers-and-walbuffers.html"},
 		},
 	}
 

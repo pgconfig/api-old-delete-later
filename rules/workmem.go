@@ -15,7 +15,7 @@ func setWorkMem(args ParameterArgs) DatabaseParameter {
 		DocURLSuffix: "runtime-config-resource.html#GUC-WORK-MEM",
 		Abstract:     "This parameter defines how much a work_mem buffer can allocate. Each query can open many work_mem buffers when execute (normally one by subquery) if it uses any sort (or aggregate) operation. When work_mem its too small a temp file is created.",
 		Articles: []ArticleRecommendation{
-			ArticleRecommendation{Title: "Understaning postgresql.conf: WORK_MEM", URL: "https://www.depesz.com/2011/07/03/understanding-postgresql-conf-work_mem/"},
+			{Title: "Understaning postgresql.conf: WORK_MEM", URL: "https://www.depesz.com/2011/07/03/understanding-postgresql-conf-work_mem/"},
 		},
 	}
 
