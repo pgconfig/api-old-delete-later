@@ -5,15 +5,13 @@ import (
 	"testing"
 )
 
-type testeaaaa struct {
-	pgVersion float32
-	env       EnvironmentName
-	expected  int
-}
-
 func TestCheckpointSegments(t *testing.T) {
 
-	cases := []testeaaaa{
+	cases := []struct {
+		pgVersion float32
+		env       EnvironmentName
+		expected  int
+	}{
 		{9.4, WebEnvironment, 32},
 		{9.0, MixedEnvironment, 32},
 		{9.2, OLTPEnvironment, 96},
