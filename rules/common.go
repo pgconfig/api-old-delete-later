@@ -191,6 +191,17 @@ func fixValue(p *DatabaseParameter, value int, pgVersion float32) int {
 	return result
 }
 
+// OSArch represents the OS arch
+type OSArch string
+
+const (
+	// Arch32Bits represents the 'i686' arch
+	Arch32Bits OSArch = "i686"
+
+	// Arch64Bits represents the 'x86-64' arch
+	Arch64Bits OSArch = "x86-64"
+)
+
 // ParameterArgs : contains a argument to compute a parameter
 type ParameterArgs struct {
 	PGVersion float32
@@ -198,6 +209,7 @@ type ParameterArgs struct {
 	TotalRAM  int
 	MaxConn   int
 	OSFamily  OSFamily
+	OSArch    OSArch
 }
 
 // ParameterRule : Defines a functions who compute a rule for the parameter
