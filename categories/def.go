@@ -13,8 +13,8 @@ type Category struct {
 
 // Compute calculates each parameter value
 func (c *Category) Compute(args params.Input) (err error) {
-	for _, param := range c.Parameters {
-		err = param.Compute(args)
+	for i := range c.Parameters {
+		err = c.Parameters[i].Compute(args)
 
 		if err != nil {
 			break
