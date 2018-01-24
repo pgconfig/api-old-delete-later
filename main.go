@@ -17,7 +17,7 @@ func main() {
 		HideDoc:   true,
 	}
 
-	for i := range catList {
+	for i := 0; i < len(catList); i++ {
 		err := catList[i].Compute(conf)
 		if err != nil {
 			panic(err)
