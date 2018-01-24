@@ -10,6 +10,7 @@ type Input struct {
 	MaxConn   int
 	OSFamily  OSFamily
 	OSArch    OSArch
+	HideDoc   bool
 }
 
 // EnvironmentName : Defines the environment name
@@ -112,7 +113,7 @@ type Parameter struct {
 	minVersion  float32
 	Value       interface{} `json:"config_value"`
 	Type        paramType   `json:"format"`
-	Doc         Doc         `json:"documentation"`
+	Doc         *Doc        `json:"documentation,omitempty"`
 	computeFunc paramCompute
 }
 
@@ -133,5 +134,10 @@ func (p *Parameter) Compute(args Input) (err error) {
 	}
 
 	p.Value, err = p.computeFunc(args)
+
+	if args.HideDoc {
+		p.Doc = nil
+	}
+
 	return
 }

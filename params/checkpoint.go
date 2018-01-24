@@ -8,7 +8,7 @@ var (
 		maxValue:   -1,
 		maxVersion: maxVersion,
 		Type:       NumericParameter,
-		Doc: Doc{
+		Doc: &Doc{
 			DefaultValue: 3,
 			DocURLSuffix: "runtime-config-wal.html#GUC-CHECKPOINT-SEGMENTS",
 			Abstract:     "This parameter defines how much WAL files can be stored before a automatic CHECKPOINT. All files are stored in the pg_xlog directory.",
