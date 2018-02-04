@@ -1,6 +1,8 @@
 package params
 
-import "errors"
+import (
+	"fmt"
+)
 
 // Input contains a argument to compute a parameter
 type Input struct {
@@ -92,10 +94,10 @@ type recommendation struct {
 
 // Doc contains documentation related to a parameter
 type Doc struct {
-	Abstract     string              `json:"abstract"`
-	Articles     []map[string]string `json:"recomendations"`
-	DocURLSuffix string              `json:"url"`
-	DefaultValue int                 `json:"default_value"`
+	Abstract     string            `json:"abstract"`
+	Articles     map[string]string `json:"recomendations"`
+	DocURLSuffix string            `json:"url"`
+	DefaultValue int               `json:"default_value"`
 }
 
 const (
@@ -128,6 +130,7 @@ func validateArgs(p *Parameter, args *Input) (err error) {
 	return
 }
 
+// TODO: check if p or args are null
 func setDefaults(p *Parameter, args *Input) {
 	if p.maxVersion == 0.0 {
 		p.maxVersion = defaultVer
@@ -135,6 +138,7 @@ func setDefaults(p *Parameter, args *Input) {
 	if args.PGVersion == 0.0 {
 		args.PGVersion = defaultVer
 	}
+}
 
 // Compute calculates a parameter
 func (p *Parameter) Compute(args Input) (err error) {
