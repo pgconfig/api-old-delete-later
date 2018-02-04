@@ -9,6 +9,7 @@ var (
 		Description: "Memory Configuration",
 		Parameters: []params.Parameter{
 			params.CheckPointSegments,
+			params.EffectiveCacheSize,
 		},
 	}
 )
