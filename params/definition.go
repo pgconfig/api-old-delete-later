@@ -103,7 +103,7 @@ const (
 	defaultVer float32 = 10.0
 )
 
-type paramCompute func(Input) (interface{}, error)
+type paramCompute func(*Parameter, *Input) (interface{}, error)
 
 // Parameter contains data about a PostgreSQL parameter
 type Parameter struct {
@@ -117,23 +117,29 @@ type Parameter struct {
 	computeFunc paramCompute
 }
 
-func validateArgs(args Input) (err error) {
-	if args.PGVersion <= minimumVer || args.PGVersion > maxVersion {
-		err = errors.New("Unsupported Version")
+func validateArgs(p *Parameter, args *Input) (err error) {
+	setDefaults(p, args)
+
+	if args.PGVersion <= minimumVer || args.PGVersion > p.maxVersion {
+		err = fmt.Errorf("Version %.1f unsupported for %s", args.PGVersion, p.Name)
 		return
 	}
 
 	return
 }
 
-// Compute calculates a parameter
-func (p *Parameter) Compute(args Input) (err error) {
-
+func setDefaults(p *Parameter, args *Input) {
+	if p.maxVersion == 0.0 {
+		p.maxVersion = defaultVer
+	}
 	if args.PGVersion == 0.0 {
 		args.PGVersion = defaultVer
 	}
 
-	p.Value, err = p.computeFunc(args)
+// Compute calculates a parameter
+func (p *Parameter) Compute(args Input) (err error) {
+
+	p.Value, err = p.computeFunc(p, &args)
 
 	if args.HideDoc {
 		p.Doc = nil

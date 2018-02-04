@@ -1,29 +1,25 @@
 package params
 
-var (
-	maxVersion float32 = 9.4
-)
-
 // CheckPointSegments contains a 'checkpoint_segments' GUC of postgresql.conf
 var CheckPointSegments = Parameter{
 	Name:       "checkpoint_segments",
 	maxValue:   -1,
-	maxVersion: maxVersion,
+	maxVersion: 9.4,
 	Type:       NumericParameter,
 	Doc: &Doc{
 		DefaultValue: 3,
 		DocURLSuffix: "runtime-config-wal.html#GUC-CHECKPOINT-SEGMENTS",
 		Abstract:     "This parameter defines how much WAL files can be stored before a automatic CHECKPOINT. All files are stored in the pg_xlog directory.",
-		Articles: []map[string]string{
-			map[string]string{"WRITE AHEAD LOG + UNDERSTANDING POSTGRESQL.CONF: CHECKPOINT_SEGMENTS, CHECKPOINT_TIMEOUT and CHECKPOINT_WARNING": "https://www.depesz.com/2011/07/14/write-ahead-log-understanding-postgresql-conf-checkpoint_segments-checkpoint_timeout-checkpoint_warning/"},
+		Articles: map[string]string{
+			"WRITE AHEAD LOG + UNDERSTANDING POSTGRESQL.CONF: CHECKPOINT_SEGMENTS, CHECKPOINT_TIMEOUT and CHECKPOINT_WARNING": "https://www.depesz.com/2011/07/14/write-ahead-log-understanding-postgresql-conf-checkpoint_segments-checkpoint_timeout-checkpoint_warning/",
 		},
 	},
 	computeFunc: computeCheckPointSegments,
 }
 
-func computeCheckPointSegments(args Input) (out interface{}, err error) {
+func computeCheckPointSegments(p *Parameter, args *Input) (out interface{}, err error) {
 
-	if err = validateArgs(args); err != nil {
+	if err = validateArgs(p, args); err != nil {
 		return
 	}
 
