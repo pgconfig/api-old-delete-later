@@ -5,36 +5,6 @@ import (
 	"testing"
 )
 
-func TestMinWalSize(t *testing.T) {
-
-	cases := []struct {
-		pgVersion float32
-		env       EnvironmentName
-		expected  int
-	}{
-		{8.2, WebEnvironment, -1},
-		{10.0, MixedEnvironment, 512 * MEGABYTE},
-		{9.6, WebEnvironment, 512 * MEGABYTE},
-		{9.5, OLTPEnvironment, 1024 * MEGABYTE},
-		{10, DesktopEnvironment, 256 * MEGABYTE},
-	}
-
-	for _, tc := range cases {
-		t.Run(fmt.Sprintf("%s: %.1f", tc.env, tc.pgVersion), func(t *testing.T) {
-
-			result, _, err := MinWalSize(ParameterArgs{PGVersion: tc.pgVersion, Env: tc.env})
-
-			if err != nil {
-				t.Error(err)
-			} else if result != tc.expected {
-				t.Fatalf("Expected %v, but got %v", tc.expected, result)
-			}
-
-		})
-	}
-
-}
-
 func TestMaxWalSize(t *testing.T) {
 
 	cases := []struct {
