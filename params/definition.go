@@ -122,7 +122,7 @@ type Parameter struct {
 func validateArgs(p *Parameter, args *Input) (err error) {
 	setDefaults(p, args)
 
-	if args.PGVersion <= minimumVer || args.PGVersion > p.maxVersion {
+	if args.PGVersion <= minimumVer || args.PGVersion > p.maxVersion || args.PGVersion < p.minVersion {
 		err = fmt.Errorf("Version %.1f unsupported for %s", args.PGVersion, p.Name)
 		return
 	}
@@ -130,8 +130,12 @@ func validateArgs(p *Parameter, args *Input) (err error) {
 	return
 }
 
-// TODO: check if p or args are null
 func setDefaults(p *Parameter, args *Input) {
+
+	if args == nil {
+		args = &Input{}
+	}
+
 	if p.maxVersion == 0.0 {
 		p.maxVersion = defaultVer
 	}
